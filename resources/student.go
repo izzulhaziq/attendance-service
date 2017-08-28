@@ -2,25 +2,15 @@ package resources
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/izzulhaziq/profile-service/models"
+	"github.com/izzulhaziq/attendance-service/models"
 )
 
-var students map[string]Student
+var students map[string]models.Student
 
 func init() {
-	students["1"] = models.Student{
-		ID:        "1",
-		Name:      "Michelle",
-		StudentID: "6441",
-		Batch:     "2003",
-	}
-
-	students["2"] = models.Student{
-		ID:        "2",
-		Name:      "Yen Peng",
-		StudentID: "3441",
-		Batch:     "2001",
-	}
+	students = map[string]models.Student{}
+	students["1"] = models.NewStudent("Michelle", "6441", "2003")
+	students["2"] = models.NewStudent("Yen Peng", "6342", "2001")
 }
 
 // StudentResource defines the /student rest api endpoint
@@ -48,8 +38,8 @@ func (r *StudentResource) getStudentByID(c *gin.Context) {
 		return
 	}
 
-	student, err := students[id]
-	if err != nil {
+	student, ok := students[id]
+	if !ok {
 		c.JSON(404, "Not Found")
 		return
 	}

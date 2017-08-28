@@ -8,13 +8,13 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
-	"github.com/izzulhaziq/profile-service/resources"
+	"github.com/izzulhaziq/attendance-service/resources"
 )
 
 func main() {
-	log.Printf("Starting HTTP server on port :%d\n", *port)
+	log.Printf("Starting HTTP server on port :%d\n", 8080)
 
-	server := startHTTPServer(*port)
+	server := createServer(8080)
 	waitForStop()
 	if err := server.Shutdown(nil); err != nil {
 		panic(err)

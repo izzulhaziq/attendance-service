@@ -31,3 +31,13 @@ type Course struct {
 	BaseModel
 	Name string `json:"name,omitempty"`
 }
+
+// NewStudent creates a new instance of Student.
+func NewStudent(name, studentID, batch string) Student {
+	return Student{
+		BaseModel: BaseModel{studentID},
+		Name:      name,
+		StudentID: studentID,
+		Batch:     batch,
+	}
+}
